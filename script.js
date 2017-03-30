@@ -1,6 +1,6 @@
 var question = ["The first “pre-computers” were powered by ____", 
 				"The first computer programmer was ____", 
-				"The first computer “bug” was named after ____", 
+				"The first computer 'bug' was named after ____", 
 				"First High Level Programming language was ____",
 				"The first computer game was ____",
 				"The first computer virus was written by ____",
@@ -18,38 +18,47 @@ var answer = ["Steam",
 
 var initialProgressString = "Currently on 1 of " + question.length + " cards";
 
+var loadCard =function(cardIndex) {
+	$('#front').text(question[cardIndex]);
+	$('#back').text(answer[cardIndex]);
+}
+
+var loadProgress = function(cardIndex, totalCards) {
+	var progressStr = "Currently on " + cardIndex + " of " + totalCards + " cards";
+	$('#progress').text(progressStr);
+}
+
+var cardFlip = function() {
+	$('#card').toggleClass('flipped');
+}
+
 $(function() {
 
 	// Loading the first card
-	var i = 0;
-	$('#front').text(question[i]);
-	$('#back').text(answer[i]);
+	loadCard(0);
 	
 	// Loading initial progress
-	$('#progress').text(initialProgressString);
+	loadProgress(1, question.length);
 	
 	// Card flip event
-	$('#card').click(function() {
-		$('#card').toggleClass('flipped');
-	});
+	$('#card').click(cardFlip);
 	
-	var i = 1;
+	var cardIndex = 1;
 	$("#btn").click(function() {
 		if ($('#card').hasClass('flipped')) {
 			$('#card').removeClass('flipped');
+			setTimeout(function() {
+				loadCard(cardIndex);
+			}, 200);
+		} else {
+		loadCard(cardIndex);	
 		};
-		var q = question[i];
-		var a = answer[i];
-		setTimeout(function() {
-		$('#front').text(q);
-		$('#back').text(a);	
-		}, 150);
-		i++;
-		var progressStr = "Currently on " + i + " of " + question.length + " cards";
-		$('#progress').text(progressStr);
-		if (i === question.length) {
-			i = 0;
+		
+		loadProgress(++cardIndex,question.length);
+		
+		if (cardIndex === question.length) {
+			cardIndex = 0;
 		}
-})
+	})
 })
 
