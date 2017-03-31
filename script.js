@@ -33,7 +33,7 @@ var cardFlip = function() {
 }
 
 $(function() {
-
+	$('.modal').hide();
 	// Loading the first card
 	loadCard(0);
 	
@@ -59,6 +59,32 @@ $(function() {
 		if (cardIndex === question.length) {
 			cardIndex = 0;
 		}
+	});
+	
+	// Adding cards
+	$('#submit').click(function(e) {
+		e.preventDefault();
+		var newQuestion = $('#newQuestion').val();
+		var newAnswer = $('#newAnswer').val();
+		if (newQuestion == "" || newAnswer == "") {
+			alert("Please enter some text");
+		} else {
+			question[question.length] = newQuestion;
+			answer[answer.length] = newAnswer;
+			loadProgress(cardIndex, question.length);
+		};
+		$('#newQuestion').val('');
+		$('#newAnswer').val('');
+	});
+	
+	$('#close').click(function(){
+		$('.modal').hide();
+	});
+	
+	$('#addbtn').click(function() {
+		$('.modal').show();
 	})
-})
+});
+
+
 

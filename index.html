@@ -12,6 +12,16 @@
 
 	<body>
 	<div class="app">
+		<div class="modal">
+			<div id="close">X</div>
+			<div class="modal-wrap">
+			<div>Question</div>
+			<input type="text" id="newQuestion">
+			<div>Answer </div>
+			<input type="text" id="newAnswer">
+			<div><button id="submit">Add new Card</button></div>
+			</div>
+		</div>
 		<div class="header">Flip cards</div>
 		<div class="container">
 			<div id="card">
@@ -20,7 +30,10 @@
 			</div>
 		</div>
 		<div id="progress"></div>
-		<div class="button" id="btn">Next</div>
+		<div class="btn-container">
+			<div class="button" id="addbtn">Add</div>
+			<div class="button" id="btn">Next</div>
+		</div>
 		</div>
 	</body>
 </html>
